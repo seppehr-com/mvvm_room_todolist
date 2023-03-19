@@ -14,6 +14,7 @@ import com.smdevs.todoapp.database.AppDatabase
 import com.smdevs.todoapp.database.todo.Todo
 import com.smdevs.todoapp.database.todo.TodoRepository
 import com.smdevs.todoapp.databinding.FragmentHomeBinding
+import com.smdevs.todoapp.dialog.ModifyItemDialogFragment
 import com.smdevs.todoapp.viewmodel.TodoViewModel
 import com.smdevs.todoapp.viewmodel.TodoViewModelFactory
 
@@ -60,13 +61,18 @@ class HomeFragment : Fragment() {
 
     private fun todosListener(){
         binding.viewModel?.allTodos?.observe(viewLifecycleOwner){
-            binding.recyclerTodo.adapter=TodosAdapter(it,{item:Todo,isChecked:Boolean->itemCheckToggleHandler(item,isChecked)})
+            binding.recyclerTodo.adapter=TodosAdapter(it,{item:Todo,isChecked:Boolean->itemCheckToggleHandler(item,isChecked)},{item:Todo->itemLongPressHandler(item)})
         }
     }
 
-    public fun itemCheckToggleHandler(todo:Todo,isChecked:Boolean){
+    fun itemCheckToggleHandler(todo:Todo,isChecked:Boolean){
         todo.checked=isChecked
         viewModel.update(todo)
+    }
+
+    fun itemLongPressHandler(todo: Todo){
+        val dialogFragment = ModifyItemDialogFragment(todo.title)
+        dialogFragment.show(parentFragmentManager,"modify_item")
     }
 
     fun navigate(){

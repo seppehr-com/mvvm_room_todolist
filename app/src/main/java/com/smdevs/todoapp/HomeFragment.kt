@@ -1,6 +1,7 @@
 package com.smdevs.todoapp
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import com.smdevs.todoapp.database.AppDatabase
 import com.smdevs.todoapp.database.todo.Todo
 import com.smdevs.todoapp.database.todo.TodoRepository
 import com.smdevs.todoapp.databinding.FragmentHomeBinding
+import com.smdevs.todoapp.dialog.ConfirmDialogFragment
 import com.smdevs.todoapp.dialog.ModifyItemDialogFragment
 import com.smdevs.todoapp.viewmodel.TodoViewModel
 import com.smdevs.todoapp.viewmodel.TodoViewModelFactory
@@ -65,14 +67,30 @@ class HomeFragment : Fragment() {
         }
     }
 
-    fun itemCheckToggleHandler(todo:Todo,isChecked:Boolean){
+    private fun itemCheckToggleHandler(todo:Todo, isChecked:Boolean){
         todo.checked=isChecked
         viewModel.update(todo)
     }
 
-    fun itemLongPressHandler(todo: Todo){
-        val dialogFragment = ModifyItemDialogFragment(todo.title)
-        dialogFragment.show(parentFragmentManager,"modify_item")
+    private fun itemLongPressHandler(todo: Todo){
+        val modifyDialog = ModifyItemDialogFragment(todo) {todoItem:Todo , action: Int ->
+            modifyHandler(todoItem,action)
+        }
+        modifyDialog.show(parentFragmentManager,"modify_item")
+    }
+
+    private fun modifyHandler(todo:Todo,action : Int){
+        when(resources.getStringArray(R.array.modify_actions)[action]){
+            "Edit"->{
+            }
+            "Remove"->{
+                val confirmDialog = ConfirmDialogFragment({->
+                    binding.viewModel?.delete(todo)
+                })
+
+                confirmDialog.show(parentFragmentManager,"confirm_dialog")
+            }
+        }
     }
 
     fun navigate(){

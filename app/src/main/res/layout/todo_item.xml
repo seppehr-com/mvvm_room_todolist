@@ -16,6 +16,7 @@
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
             android:background="@drawable/row_item_background"
+            android:clickable="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

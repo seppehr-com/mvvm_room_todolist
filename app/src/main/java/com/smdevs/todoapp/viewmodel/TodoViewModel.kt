@@ -38,6 +38,12 @@ class TodoViewModel(private val repository: TodoRepository,val navigate: () -> U
         }
     }
 
+    fun delete(todo: Todo){
+        viewModelScope.launch {
+            repository.delete(todo)
+        }
+    }
+
     fun update(todo: Todo){
         viewModelScope.launch {
             repository.update(todo)

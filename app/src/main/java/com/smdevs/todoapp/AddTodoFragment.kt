@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.smdevs.todoapp.database.AppDatabase
 import com.smdevs.todoapp.database.todo.TodoRepository
 import com.smdevs.todoapp.databinding.FragmentAddTodoBinding
@@ -45,18 +46,25 @@ class AddTodoFragment : Fragment() {
         //Repository
         val repository = TodoRepository(dao)
         //ViewModel
-        val factory =TodoViewModelFactory(repository)
+        val factory =TodoViewModelFactory(repository,{goBack()})
         viewModel = ViewModelProvider(this,factory).get(TodoViewModel::class.java)
         binding.viewModel = viewModel
 
         return binding.root
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            com.google.android.material.R.id.navigation_bar_item_active_indicator_view -> view?.findNavController()?.navigate(R.id.action_addTodoFragment_to_homeFragment)
-        }
-        return super.onOptionsItemSelected(item)
+    fun goBack(){
+        view?.findNavController()?.navigate(R.id.action_addTodoFragment_to_homeFragment)
+        Snackbar.make(requireView(),"You successfully added your todo!",Snackbar.LENGTH_SHORT).show()
     }
+
+//
+//
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        when(item.itemId){
+//            com.google.android.material.R.id.navigation_bar_item_active_indicator_view -> view?.findNavController()?.navigate(R.id.action_addTodoFragment_to_homeFragment)
+//        }
+//        return super.onOptionsItemSelected(item)
+//    }
 
 }

@@ -38,6 +38,12 @@ class TodoViewModel(private val repository: TodoRepository,val navigate: () -> U
         }
     }
 
+    fun update(todo: Todo){
+        viewModelScope.launch {
+            repository.update(todo)
+        }
+    }
+
     //Observable Functions
     override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
     }

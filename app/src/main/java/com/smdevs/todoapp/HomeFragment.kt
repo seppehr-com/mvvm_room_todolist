@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.smdevs.todoapp.adapter.TodosAdapter
 import com.smdevs.todoapp.database.AppDatabase
+import com.smdevs.todoapp.database.todo.Todo
 import com.smdevs.todoapp.database.todo.TodoRepository
 import com.smdevs.todoapp.databinding.FragmentHomeBinding
 import com.smdevs.todoapp.viewmodel.TodoViewModel
@@ -59,8 +60,13 @@ class HomeFragment : Fragment() {
 
     private fun todosListener(){
         binding.viewModel?.allTodos?.observe(viewLifecycleOwner){
-            binding.recyclerTodo.adapter=TodosAdapter(it)
+            binding.recyclerTodo.adapter=TodosAdapter(it,{item:Todo,isChecked:Boolean->itemCheckToggleHandler(item,isChecked)})
         }
+    }
+
+    public fun itemCheckToggleHandler(todo:Todo,isChecked:Boolean){
+        todo.checked=isChecked
+        viewModel.update(todo)
     }
 
     fun navigate(){

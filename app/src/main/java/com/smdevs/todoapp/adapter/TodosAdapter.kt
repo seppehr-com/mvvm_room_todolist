@@ -9,7 +9,7 @@ import com.smdevs.todoapp.R
 import com.smdevs.todoapp.database.todo.Todo
 import com.smdevs.todoapp.databinding.TodoItemBinding
 
-class TodosAdapter(val todos: List<Todo>) : RecyclerView.Adapter<TodosViewHolder>() {
+class TodosAdapter(val todos: List<Todo>,val checkHandler:(Todo,Boolean)->Unit) : RecyclerView.Adapter<TodosViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodosViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding : TodoItemBinding = DataBindingUtil.inflate(layoutInflater,
@@ -19,7 +19,7 @@ class TodosAdapter(val todos: List<Todo>) : RecyclerView.Adapter<TodosViewHolder
     }
 
     override fun onBindViewHolder(holder: TodosViewHolder, position: Int) {
-        holder.bind(todos[position])
+        holder.bind(todos[position],{item:Todo,isChecked:Boolean->checkHandler(item,isChecked)})
     }
 
     override fun getItemCount(): Int {
@@ -28,10 +28,19 @@ class TodosAdapter(val todos: List<Todo>) : RecyclerView.Adapter<TodosViewHolder
 }
 
 class TodosViewHolder(val binding : TodoItemBinding) : RecyclerView.ViewHolder(binding.root){
-    fun bind(todo: Todo){
+    fun bind(todo: Todo,checkHandler:(Todo,Boolean)->Unit){
         binding.apply {
             this.itemTitle.text = todo.title
             this.checkBox.isChecked = todo.checked
+        }
+
+        binding.checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
+            checkHandler(todo,isChecked)
+        }
+
+        binding.linearLayout.setOnClickListener {
+            val isChecked=!binding.checkBox.isChecked
+            checkHandler(todo,isChecked)
         }
     }
 }

@@ -13,4 +13,9 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorSecondaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="ThemeSplashScreen" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/secondary</item>
+        <item name="android:windowBackground">@drawable/splash_image</item>
+    </style>
 </resources>

@@ -4,8 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Blackbird/AndroidStudioProjects/TodoApp/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1445" />
+        <entry key="..\:/Users/Blackbird/AndroidStudioProjects/TodoApp/app/src/main/res/drawable/ic_baseline_library_add_check_24.xml" value="0.176" />
         <entry key="..\:/Users/Blackbird/AndroidStudioProjects/TodoApp/app/src/main/res/drawable/row_item_background.xml" value="0.214" />
         <entry key="..\:/Users/Blackbird/AndroidStudioProjects/TodoApp/app/src/main/res/drawable/row_item_selector.xml" value="0.1975" />
+        <entry key="..\:/Users/Blackbird/AndroidStudioProjects/TodoApp/app/src/main/res/drawable/splash_image.xml" value="0.176" />
         <entry key="..\:/Users/Blackbird/AndroidStudioProjects/TodoApp/app/src/main/res/layout/activity_main.xml" value="0.2760416666666667" />
         <entry key="..\:/Users/Blackbird/AndroidStudioProjects/TodoApp/app/src/main/res/layout/fragment_add_todo.xml" value="0.2857142857142857" />
         <entry key="..\:/Users/Blackbird/AndroidStudioProjects/TodoApp/app/src/main/res/layout/fragment_home.xml" value="0.2857142857142857" />

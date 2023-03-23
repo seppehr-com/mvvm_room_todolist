@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -43,7 +44,8 @@ class HomeFragment : Fragment() {
         }
 
         binding.floatingActionButton.setOnClickListener {
-            view?.findNavController()?.navigate(R.id.action_homeFragment_to_addTodoFragment)
+            val bundle = bundleOf("action" to "insert")
+            view?.findNavController()?.navigate(R.id.action_homeFragment_to_addTodoFragment,bundle)
         }
 
         //Dao
@@ -82,6 +84,10 @@ class HomeFragment : Fragment() {
     private fun modifyHandler(todo:Todo,action : Int){
         when(resources.getStringArray(R.array.modify_actions)[action]){
             "Edit"->{
+                val bundle = bundleOf("action" to "update")
+                bundle.putSerializable("todo",todo)
+
+                view?.findNavController()?.navigate(R.id.action_homeFragment_to_addTodoFragment,bundle)
             }
             "Remove"->{
                 val confirmDialog = ConfirmDialogFragment({->

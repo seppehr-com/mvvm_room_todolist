@@ -12,24 +12,50 @@ import kotlinx.coroutines.launch
 class TodoViewModel(private val repository: TodoRepository,val navigate: () -> Unit) : ViewModel(),Observable {
     val allTodos = repository.allTodos
 
+    lateinit var editableTodo:Todo
+    var isEditing : Boolean = false
+
     @Bindable
     var inputTitle = MutableLiveData<String>()!!
 
     @Bindable
     var inputPriority = MutableLiveData<String>()!!
 
+    @Bindable
+    var saveButton = MutableLiveData<String>("Add Todo")
 
-    public fun addHandler(){
-//        Log.i("appInfo",inputTitle.value.toString())
-//        Log.i("appInfo",inputPriority.value.toString())
 
+     fun editTodo(todo: Todo){
+        inputTitle.value = todo.title
+        inputPriority.value = todo.priority.toString()
+
+        saveButton.value="Update"
+        editableTodo = todo
+        isEditing = true
+    }
+
+
+     fun saveHandler(){
         if(inputTitle.value == null || inputPriority.value == null){
             return
         }
 
-        insert(Todo(0,inputTitle.value.toString(),inputPriority.value.toString().toInt(),false))
+        if(isEditing){
+            editableTodo.apply {
+                this.title=inputTitle.value.toString()
+                this.priority=inputPriority.value.toString().toInt()
+            }
+
+            update(editableTodo)
+        }
+        else
+            insert(Todo(0,inputTitle.value.toString(),inputPriority.value.toString().toInt(),false))
 
         navigate()
+    }
+
+    fun getTodoById(id: Int) :LiveData<Todo>{
+        return  repository.getTodoById(id)
     }
 
     fun insert(todo: Todo){

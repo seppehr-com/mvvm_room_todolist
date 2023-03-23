@@ -1,6 +1,7 @@
 package com.smdevs.todoapp
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -13,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.smdevs.todoapp.database.AppDatabase
+import com.smdevs.todoapp.database.todo.Todo
 import com.smdevs.todoapp.database.todo.TodoRepository
 import com.smdevs.todoapp.databinding.FragmentAddTodoBinding
 import com.smdevs.todoapp.viewmodel.TodoViewModel
@@ -50,12 +52,24 @@ class AddTodoFragment : Fragment() {
         viewModel = ViewModelProvider(this,factory).get(TodoViewModel::class.java)
         binding.viewModel = viewModel
 
+        getArgs()
+
         return binding.root
     }
 
-    fun goBack(){
+    private fun goBack(){
         view?.findNavController()?.navigate(R.id.action_addTodoFragment_to_homeFragment)
         Snackbar.make(requireView(),"You successfully added your todo!",Snackbar.LENGTH_SHORT).show()
+    }
+
+    private fun getArgs(){
+        //Get arguments
+        val action = arguments?.getString("action").toString()
+
+        if(action == "update"){
+            val todo = arguments?.getSerializable("todo") as Todo
+            viewModel.editTodo(todo)
+        }
     }
 
 //

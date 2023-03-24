@@ -5,6 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -51,6 +53,23 @@ class AddTodoFragment : Fragment() {
         binding.viewModel = viewModel
 
         getArgs()
+
+        //Test Spinner
+//        binding.spinnerPriority.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+//            override fun onItemSelected(
+//                parent: AdapterView<*>?,
+//                view: View?,
+//                position: Int,
+//                id: Long
+//            ) {
+//                Toast.makeText(activity,"You selected ${position}",Toast.LENGTH_SHORT).show()
+//            }
+//
+//            override fun onNothingSelected(parent: AdapterView<*>?) {
+//
+//            }
+//
+//        }
 
         return binding.root
     }

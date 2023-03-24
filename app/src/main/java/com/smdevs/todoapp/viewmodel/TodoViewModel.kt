@@ -19,7 +19,7 @@ class TodoViewModel(private val repository: TodoRepository,val navigate: () -> U
     var inputTitle = MutableLiveData<String>()!!
 
     @Bindable
-    var inputPriority = MutableLiveData<String>()!!
+    var inputPriority = MutableLiveData<Int>(0)
 
     @Bindable
     var saveButton = MutableLiveData<String>("Add Todo")
@@ -27,7 +27,7 @@ class TodoViewModel(private val repository: TodoRepository,val navigate: () -> U
 
      fun editTodo(todo: Todo){
         inputTitle.value = todo.title
-        inputPriority.value = todo.priority.toString()
+        inputPriority.value = todo.priority
 
         saveButton.value="Update"
         editableTodo = todo

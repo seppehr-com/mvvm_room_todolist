@@ -17,6 +17,7 @@
         tools:context=".AddTodoFragment">
 
         <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/linearLayoutCompat"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="20dp"
@@ -38,17 +39,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/inputPriority"
+
+            <Spinner
+                android:id="@+id/spinnerPriority"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="14dp"
-                android:ems="10"
-                android:hint="Priority"
-                android:inputType="phone"
-                android:text="@={viewModel.inputPriority}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_marginTop="20dp"
+                android:entries="@array/priorities"
+                android:selectedItemPosition="@={viewModel.inputPriority}"
+                />
 
             <Button
                 android:layout_width="match_parent"
@@ -58,12 +57,5 @@
                 android:text="@{viewModel.saveButton,default=`Add Todo`}" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
-
-<!--        <Spinner-->
-<!--            android:id="@+id/spinner"-->
-<!--            android:layout_width="409dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            tools:layout_editor_absoluteX="1dp"-->
-<!--            tools:layout_editor_absoluteY="345dp" />-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

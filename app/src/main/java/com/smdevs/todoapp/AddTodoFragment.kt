@@ -43,6 +43,12 @@ class AddTodoFragment : Fragment() {
             this?.setDisplayHomeAsUpEnabled(true)
         }
 
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         //Dao
         val dao = AppDatabase.getDatabase(requireActivity().application).todoDao
         //Repository
@@ -53,25 +59,6 @@ class AddTodoFragment : Fragment() {
         binding.viewModel = viewModel
 
         getArgs()
-
-        //Test Spinner
-//        binding.spinnerPriority.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-//            override fun onItemSelected(
-//                parent: AdapterView<*>?,
-//                view: View?,
-//                position: Int,
-//                id: Long
-//            ) {
-//                Toast.makeText(activity,"You selected ${position}",Toast.LENGTH_SHORT).show()
-//            }
-//
-//            override fun onNothingSelected(parent: AdapterView<*>?) {
-//
-//            }
-//
-//        }
-
-        return binding.root
     }
 
     private fun goBack(){

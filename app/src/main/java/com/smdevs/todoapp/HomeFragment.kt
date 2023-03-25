@@ -43,9 +43,15 @@ class HomeFragment : Fragment() {
             this?.setDisplayHomeAsUpEnabled(false)
         }
 
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         binding.floatingActionButton.setOnClickListener {
             val bundle = bundleOf("action" to "insert")
-            view?.findNavController()?.navigate(R.id.action_homeFragment_to_addTodoFragment,bundle)
+            view.findNavController().navigate(R.id.action_homeFragment_to_addTodoFragment,bundle)
         }
 
         //Dao
@@ -59,8 +65,6 @@ class HomeFragment : Fragment() {
         binding.viewModel=viewModel
 
         todosListener()
-
-        return binding.root
     }
 
     private fun todosListener(){

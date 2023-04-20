@@ -8,8 +8,6 @@ import androidx.navigation.findNavController
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //Manual SplashScreen
-//        setTheme(R.style.Theme_TodoApp)
         //SplashScreen Api
         installSplashScreen()
         setContentView(R.layout.activity_main)

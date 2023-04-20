@@ -43,6 +43,8 @@ class HomeFragment : Fragment() {
             this?.setDisplayHomeAsUpEnabled(false)
         }
 
+//        activity?.setTitle("Todos")
+
         return binding.root
     }
 
